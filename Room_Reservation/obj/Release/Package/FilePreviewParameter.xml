@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="roomreservationatos" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\VS\ Projects\\Room_Reservation\\Room_Reservation\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\VS\ Projects\\Room_Reservation\\Room_Reservation\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Room_ReservationDbContext-Web.config Connection String" description="" value="Data Source=.;Initial Catalog=Room_ReservationDB;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\VS\ Projects\\Room_Reservation\\Room_Reservation\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Room_ReservationDbContext']/@connectionString" />
+  </parameter>
+</parameters>

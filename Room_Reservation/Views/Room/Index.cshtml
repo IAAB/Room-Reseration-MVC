@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Room_Reservation.Models.Room>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Rooms</h1>
+
+@if (Session["Id"] == null)
+{
+    <h2>
+        To see the content of this page you have to
+        @Html.ActionLink("Sing in", "LogIn", "Account") or @Html.ActionLink("Create new account", "Register", "Account").
+    </h2>
+
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasTV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasProjector)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasTV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasProjector)
+                </td>
+                <td>
+                    @Html.ActionLink("View reservation history", "History", new { id = item.Id }) or
+                    @Html.ActionLink("Make new reservation", "Reserve", new { id = item.Id }) 
+                </td>
+            </tr>
+        }
+
+    </table>
+}

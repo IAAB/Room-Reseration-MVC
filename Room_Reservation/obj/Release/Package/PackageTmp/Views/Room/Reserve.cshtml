@@ -1,0 +1,53 @@
+﻿@model Room_Reservation.Models.Reservation
+
+@{
+    ViewBag.Title = "Reserve";
+}
+<link href="~/Content/jquery.datetimepicker.css" type="text/css" rel="stylesheet" />
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    var id = int.Parse(this.ViewContext.RouteData.Values["Id"].ToString());
+
+    <div class="form-horizontal">
+        <h1>
+            Reservation for Room @id
+        </h1>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReservedFrom, "Reservation start time :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReservedFrom, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.ReservedFrom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReservedTo, "Reservation end time :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReservedTo, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.ReservedTo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.Hidden("RoomId",id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Reserve" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.datetimepicker.full.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datetimepicker({
+            format:"m/d/Y H:i"
+        });
+    });
+</script>
