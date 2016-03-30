@@ -29,10 +29,15 @@
         {
             reservation.UserAccountId = int.Parse(Session["Id"].ToString());
             //Check if there are future reservations and check if room iss reservated
-            var reservedFrom = db.Reservations.AsEnumerable().Where(r => r.RoomId == reservation.RoomId).Select(r => r.ReservedFrom)
-                .Where(t => t.Date.CompareTo(DateTime.Now) >= 0).ToList();
-            var reservedTo = db.Reservations.AsEnumerable().Where(r => r.RoomId == reservation.RoomId).Select(r => r.ReservedTo)
-                .Where(t => t.Date.CompareTo(DateTime.Now) >= 0).ToList();
+            //Changed logic
+            var reservedFrom = db.Reservations.AsEnumerable()
+                .Where(r => r.RoomId == reservation.RoomId && r.ReservedFrom.CompareTo(DateTime.Now) >=0)
+                .Select(r => r.ReservedFrom)
+                .ToList();
+            var reservedTo = db.Reservations.AsEnumerable()
+                .Where(r => r.RoomId == reservation.RoomId && r.ReservedTo.CompareTo(DateTime.Now)>=0)
+                .Select(r => r.ReservedTo)
+                .ToList();
             var toCheckReserveFrom = reservation.ReservedFrom;
             var toCheckReserveTo = reservation.ReservedTo;
 
